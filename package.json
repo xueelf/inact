@@ -1,5 +1,5 @@
 {
-  "name": "hanno",
+  "name": "inact",
   "version": "0.0.1",
   "description": "Transpile the JSX to HTML strings",
   "exports": {
@@ -14,20 +14,21 @@
       "require": "./lib/index.js"
     }
   },
-  "packageManager": "bun@1.2.0",
+  "packageManager": "bun@1.3.0",
   "files": [
     "lib",
     "types"
   ],
   "scripts": {
     "build": "bun ./scripts/build/index.ts",
-    "format": "prettier . --write --cache",
+    "format": "prettier **/*.ts --write",
+    "lint": "eslint **/*.ts",
     "test": "bun test",
     "prepare": "husky"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xueelf/hanno.git"
+    "url": "git+https://github.com/xueelf/inact.git"
   },
   "keywords": [
     "html",
@@ -37,17 +38,29 @@
   "author": "Yuki <admin@yuki.sh>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/xueelf/hanno/issues"
+    "url": "https://github.com/xueelf/inact/issues"
   },
-  "homepage": "https://github.com/xueelf/hanno#readme",
+  "homepage": "https://github.com/xueelf/inact#readme",
   "devDependencies": {
     "@commitlint/cli": "latest",
     "@commitlint/config-conventional": "latest",
-    "@types/bun": "latest",
+    "@eslint/js": "latest",
+    "eslint": "latest",
     "husky": "latest",
-    "prettier": "latest"
+    "prettier": "latest",
+    "typescript-eslint": "latest"
   },
   "peerDependencies": {
     "typescript": "latest"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "bun",
+      "onFail": "error"
+    },
+    "packageManager": {
+      "name": "bun",
+      "onFail": "error"
+    }
   }
 }

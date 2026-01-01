@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
     /* Language and Environment */
-    "target": "ESNext",
-    "lib": ["DOM", "ESNext"],
+    "target": "esnext",
+    "lib": ["dom", "esnext"],
     "jsx": "react-jsx",
     "jsxImportSource": "@",
     "moduleDetection": "force",
 
     /* Modules */
-    "module": "ESNext",
+    "module": "esnext",
     "moduleResolution": "bundler",
     "baseUrl": "./",
     "paths": {
