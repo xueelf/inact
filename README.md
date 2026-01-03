@@ -1,8 +1,8 @@
-# hanno
+# inact
 
-Hanno is a transformation library that can directly output JSX as its HTML string.
+Inact is a transformation library that can directly output JSX as its HTML string.
 
-Read this in other languages: English | [简体中文](./README.zh.md)
+Read this in other languages: English | [简体中文](https://github.com/xueelf/inact/blob/master/README.zh.md)
 
 ```jsx
 console.log(<div>hello world</div>); // -> '<div>hello world</div>'
@@ -52,7 +52,7 @@ Although nowadays, there are excellent projects like [React](https://react.dev/)
 
 Not everyone has a use case for virtual DOM, and not everyone wants to write `app` and `render` in their **small projects**.
 
-So, what does Hanno do?
+So, what does Inact do?
 
 ```jsx
 const message = 'hello world';
@@ -67,13 +67,13 @@ app.innerHTML = <div>{message}</div>;
 
 ## Installation
 
-I recommend using Hanno directly with [TypeScript](https://www.typescriptlang.org/). You can use npm or other package managers to install the relevant dependencies.
+I recommend using Inact directly with [TypeScript](https://www.typescriptlang.org/). You can use npm or other package managers to install the relevant dependencies.
 
 ```shell
-npm install typescript hanno
+npm install -D typescript inact
 ```
 
-Of course, if you don't want to use TypeScript for development, you can also integrate tools like [ESBuild](https://esbuild.github.io/) or [Rollup](https://rollupjs.org/). Hanno is essentially a `jsx-runtime` and can be freely used in combination with these tools.
+Of course, if you don't want to use TypeScript for development, you can also integrate tools like [ESBuild](https://esbuild.github.io/) or [Rollup](https://rollupjs.org/). Inact is essentially a `jsx-runtime` and can be freely used in combination with these tools.
 
 ## Usage
 
@@ -83,7 +83,7 @@ Taking TypeScript as an example, after installing the relevant dependencies, we 
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "hanno"
+    "jsxImportSource": "inact"
   }
 }
 ```
@@ -100,10 +100,6 @@ const app: HTMLElement = document.getElementById('app')!;
 
 app.innerHTML = <Paragraph content={message} />;
 ```
-
-## Name
-
-"hanno" is the romanization of the Japanese word "反応", which is exactly "react" in English, so I used it as name of the project.
 
 ## About
 

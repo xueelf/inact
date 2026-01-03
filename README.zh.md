@@ -1,8 +1,8 @@
-# hanno
+# inact
 
-Hanno 是一个可以将 JSX 直接输出为其 HTML 字符串的转换库。
+Inact 是一个可以将 JSX 直接输出为其 HTML 字符串的转换库。
 
-使用其他语言阅读：[English](./README.md) | 简体中文
+使用其他语言阅读：[English](https://github.com/xueelf/inact/blob/master/README.md) | 简体中文
 
 ```jsx
 console.log(<div>hello world</div>); // -> '<div>hello world</div>'
@@ -52,7 +52,7 @@ function MyComponent() {
 
 不是所有人都有虚拟 DOM 的需求场景，也不是所有人都想在自己的**小型项目**中编写 `app` 与 `render`。
 
-那么，Hanno 是怎么做的？
+那么，Inact 是怎么做的？
 
 ```jsx
 const message = 'hello world';
@@ -67,13 +67,13 @@ app.innerHTML = <div>{message}</div>;
 
 ## 安装
 
-我推荐将 Hanno 直接搭配 [TypeScript](https://www.typescriptlang.org/) 来使用，你可以使用 npm，或者其它包管理器安装相关依赖。
+我推荐将 Inact 直接搭配 [TypeScript](https://www.typescriptlang.org/) 来使用，你可以使用 npm，或者其它包管理器安装相关依赖。
 
 ```shell
-npm install typescript hanno
+npm install -D typescript inact
 ```
 
-当然，如果你不想使用 TypeScript 开发，也可以集成 [ESBuild](https://esbuild.github.io/) 或 [Rollup](https://rollupjs.org/) 等工具，Hanno 本质上是一个 `jsx-runtime`，可以自由搭配使用。
+当然，如果你不想使用 TypeScript 开发，也可以集成 [ESBuild](https://esbuild.github.io/) 或 [Rollup](https://rollupjs.org/) 等工具，Inact 本质上是一个 `jsx-runtime`，可以自由搭配使用。
 
 ## 使用
 
@@ -83,7 +83,7 @@ npm install typescript hanno
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "hanno"
+    "jsxImportSource": "inact"
   }
 }
 ```
@@ -100,10 +100,6 @@ const app: HTMLElement = document.getElementById('app')!;
 
 app.innerHTML = <Paragraph content={message} />;
 ```
-
-## 名字
-
-「hanno」 是日语「反応」的罗马音，其英语正是「react」，我便将其用做了该项目的名字。
 
 ## 关于
 
