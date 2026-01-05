@@ -1,11 +1,12 @@
 # inact
 
-Inact 是一个可以将 JSX 直接输出为其 HTML 字符串的转换库。
+Inact 是一个可以将 JSX 直接输出为 HTML 字符串的转换库。
 
-使用其他语言阅读：[English](https://github.com/xueelf/inact/blob/master/README.md) | 简体中文
+使用其他语言阅读：[English](https://github.com/xueelf/inact/blob/master/README.md) | 中文
 
-```jsx
-console.log(<div>hello world</div>); // -> '<div>hello world</div>'
+```tsx
+const Paragraph = <p>hello world</p>;
+console.log(<Paragraph />); // -> '<p>hello world</p>'
 ```
 
 ## 介绍
@@ -17,21 +18,21 @@ console.log(<div>hello world</div>); // -> '<div>hello world</div>'
 例如下列代码，这是一个最简单的示例：
 
 ```javascript
-const message = 'hello world';
+const content = 'hello world';
 const app = document.getElementById('app');
 
 app.innerHTML = `
-  <div>${message}</div>
+  <p>${content}</p>
 `;
 ```
 
 除此之外，我们也可以使用函数来创建页面元素：
 
 ```javascript
-const message = 'hello world';
+const text = 'hello world';
 const app = document.getElementById('app');
-const element = document.createElement('div');
-const content = document.createTextNode(message);
+const element = document.createElement('p');
+const content = document.createTextNode(text);
 
 element.appendChild(content);
 app.insertBefore(element, null);
@@ -39,12 +40,13 @@ app.insertBefore(element, null);
 
 但相较于前者，它太过于复杂了，如果涉及的页面元素较多，代码也会变得没有可读性。因此，人们更加倾向于使用模板字符串。
 
-那...有没有一种可能，我们可以使用 JSX？
+可是，在使用模板字符串来编写 HTML 时，IDE 并不会有标签高亮和补全提示，代码写错时也不会有对应的报错提示。要是涉及到模板的 for 循环遍历输出...如果你写过 ASP、JSP、PHP，一定知道这玩意有多恶心。~~（IDEA：没想到吧，我还真有模板字符串的标签高亮和补全。）~~
 
-```jsx
-function MyComponent() {
-  const message = 'hello world';
-  return <div>{message}</div>;
+那...有没有一种可能，我们可以使用 JSX 来解决这个问题？
+
+```tsx
+function Paragraph(props: { content: string }): string {
+  return <p>{props.content}</p>;
 }
 ```
 
@@ -55,10 +57,10 @@ function MyComponent() {
 那么，Inact 是怎么做的？
 
 ```jsx
-const message = 'hello world';
+const content = 'hello world';
 const app = document.getElementById('app');
 
-app.innerHTML = <div>{message}</div>;
+app.innerHTML = <p>{content}</p>;
 ```
 
 ~~Wow, amazing, only JSX can do!~~
@@ -73,11 +75,11 @@ app.innerHTML = <div>{message}</div>;
 npm install -D typescript inact
 ```
 
-当然，如果你不想使用 TypeScript 开发，也可以集成 [ESBuild](https://esbuild.github.io/) 或 [Rollup](https://rollupjs.org/) 等工具，Inact 本质上是一个 `jsx-runtime`，可以自由搭配使用。
+当然，如果你不使用 TypeScript 开发，也可以集成 [ESBuild](https://esbuild.github.io/) 或 [Rollup](https://rollupjs.org/) 等工具，Inact 本质上是一个 `jsx-runtime`，可以自由搭配使用。
 
 ## 使用
 
-以 TypeScript 为例，当安装好相关依赖后，我们需要在项目根目录执行 `tsc --init` 命令，并修改对应的 `tsconfig.json` 文件内容：
+以 TypeScript 为例，当安装好相关依赖后，我们需要先在项目根目录执行 `tsc --init` 命令，并修改生成的 `tsconfig.json` 文件内容：
 
 ```json
 {
@@ -92,22 +94,53 @@ npm install -D typescript inact
 
 ```tsx
 function Paragraph(props: { content: string }): string {
-  return <div>{props.content}</div>;
+  return <p>{props.content}</p>;
 }
 
-const message: string = 'hello world';
+const text: string = 'hello world';
 const app: HTMLElement = document.getElementById('app')!;
 
-app.innerHTML = <Paragraph content={message} />;
+app.innerHTML = <Paragraph content={text} />;
+```
+
+## 特性
+
+### class
+
+支持数组和对象：
+
+```tsx
+<div class={['foo', 'bar']} />
+<div class={{ foo: true, bar: false }} />
+```
+
+### style
+
+支持小驼峰对象：
+
+```tsx
+<div style={{ backgroundColor: 'red' }} />
+```
+
+### Fragment
+
+可以使用 `<>...</>` 或者 `<Fragment>...</Fragment>` 来对元素进行分组，从而无需在 HTML 中添加额外的包裹节点，提升代码可读性和维护性。
+
+### dangerouslySetInnerHTML
+
+如果你需要渲染原始 HTML 文本：
+
+```tsx
+<div dangerouslySetInnerHTML={{ __html: '<span>Raw HTML</span>' }} />
 ```
 
 ## 关于
 
 最初，我是因为要在 [Docsify](https://docsify.js.org/) 中开发插件（这是一个可以将 Markdown 转换为 HTML 并渲染至页面的文档框架），便使用了模板字符串来处理页面元素，docsify 的大部分插件也都是这么做的。
 
-但随着时间的推移，我愈发觉得代码会逐渐变得不易维护和不可读，所以开始使用 [vhtml](https://github.com/developit/vhtml) 来重构插件，该项目也是 Preact 曾经推荐用于纯 HTML 字符串输出的解决方案。
+但随着时间的推移，我愈发感到代码变得难以维护和阅读，所以开始使用 [vhtml](https://github.com/developit/vhtml) 来重构插件，该项目也是 Preact 曾经推荐用于纯 HTML 字符串输出的解决方案。
 
-但是 vhtml 并没有完全解决我的使用需求，例如，我要为 class 传入数组亦或是对象，它并没有为其提供支持。其次是 vhtml 仅仅提供了 `h` 函数，如果想在 TypeScript 中使用，还需要额外的配置并自行定义 JSX 类型和编写 `Fragment` 函数，不能做到开箱即用。
+可是 vhtml 并没有完全解决我的使用需求，例如，我要为 class 传入数组亦或是对象，它并没有为其提供支持。其次是 vhtml 仅仅提供了 `h` 函数，如果想在 TypeScript 中使用，还需要额外的配置并自行定义 JSX 类型和编写 `Fragment` 函数，不能做到开箱即用。
 
 更重要的是，在 vhtml 的源码中，使用到了 `arguments` 这个不被推荐、在严格模式中表现不一致的关键字。例如我现在习惯使用 bun 开发项目，就遇到了各种诡异的问题，它并不适合集成到现代代码中。
 
