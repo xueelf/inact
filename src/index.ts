@@ -15,13 +15,7 @@ function serialize(children: unknown): string {
     case typeof children === 'boolean':
       return '';
     case Array.isArray(children):
-      /**
-       * TODO: improve the array element.
-       *
-       * Current: [0, 1, 2] => "012"
-       * Ideal  : [0, 1, 2] => "[0,1,2]"
-       */
-      return children.map(serialize).join('');
+      return JSON.stringify(children);
     default:
       return String(children);
   }
