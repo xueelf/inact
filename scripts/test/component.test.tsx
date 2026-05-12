@@ -23,3 +23,28 @@ test('component multiple', () => {
 
   expect(<Parent />).toBe('<div><div>Child</div></div>');
 });
+
+test('component children', () => {
+  function Wrapper(props: { children?: unknown }) {
+    return <section>{props.children}</section>;
+  }
+
+  expect(
+    <Wrapper>
+      <span>Child</span>
+    </Wrapper>,
+  ).toBe('<section><span>Child</span></section>');
+});
+
+test('component fragment', () => {
+  function Items() {
+    return (
+      <>
+        <span>Item</span>
+        <span>Item</span>
+      </>
+    );
+  }
+
+  expect(<Items />).toBe('<span>Item</span><span>Item</span>');
+});

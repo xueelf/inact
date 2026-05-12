@@ -8,7 +8,17 @@ test('attribute string', () => {
 
 test('attribute boolean', () => {
   expect(<input disabled value="attribute boolean" />).toBe(
-    '<input disabled="" value="attribute boolean" />',
+    '<input disabled value="attribute boolean" />',
+  );
+
+  expect(<input disabled={false} value="attribute boolean" />).toBe(
+    '<input value="attribute boolean" />',
+  );
+});
+
+test('attribute empty', () => {
+  expect(<div title={undefined}>attribute empty</div>).toBe(
+    '<div>attribute empty</div>',
   );
 });
 
@@ -34,4 +44,10 @@ test('attribute style', () => {
   expect(
     <div style={{ color: 'red', fontSize: '16px' }}>style object</div>,
   ).toBe('<div style="color: red; font-size: 16px">style object</div>');
+});
+
+test('attribute raw string', () => {
+  expect(<div title="<img />">attribute raw string</div>).toBe(
+    '<div title="<img />">attribute raw string</div>',
+  );
 });
