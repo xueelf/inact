@@ -42,13 +42,14 @@
   },
   "homepage": "https://github.com/xueelf/inact#readme",
   "devDependencies": {
-    "@commitlint/cli": "latest",
-    "@commitlint/config-conventional": "latest",
-    "@eslint/js": "latest",
-    "eslint": "latest",
-    "husky": "latest",
-    "prettier": "latest",
-    "typescript-eslint": "latest"
+    "@commitlint/cli": "^21.0.0",
+    "@commitlint/config-conventional": "^21.0.0",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.3.0",
+    "husky": "^9.1.7",
+    "prettier": "^3.8.3",
+    "prettier-plugin-sort": "^0.1.0",
+    "typescript-eslint": "^8.59.2"
   },
   "peerDependencies": {
     "typescript": "latest"

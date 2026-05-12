@@ -8,4 +8,14 @@ export default {
   quoteProps: 'as-needed',
   arrowParens: 'avoid',
   endOfLine: 'lf',
+  plugins: ['prettier-plugin-sort'],
+  importOrderGroups: [
+    'builtin',
+    'external',
+    'internal',
+    'parent',
+    'sibling',
+    'index',
+  ],
+  importOrderTypeImports: 'inline-first',
 } satisfies Config;
