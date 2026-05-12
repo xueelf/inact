@@ -1,38 +1,50 @@
 {
   "compilerOptions": {
-    /* Language and Environment */
-    "target": "esnext",
-    "lib": ["dom", "esnext"],
+    // Environment setup & latest features
+    "lib": ["DOM", "ESNext"],
+    "target": "ESNext",
+    "module": "Preserve",
+    "moduleDetection": "force",
     "jsx": "react-jsx",
     "jsxImportSource": "@",
-    "moduleDetection": "force",
+    "allowJs": true,
 
-    /* Modules */
-    "module": "esnext",
+    // Bundler mode
     "moduleResolution": "bundler",
-    "baseUrl": "./",
-    "paths": {
-      "@/*": ["src/*"],
-      "@/types": ["types/jsx"],
-      "@/jsx-runtime": ["src/index"],
-      "@/jsx-dev-runtime": ["src/index"]
-    },
     "allowImportingTsExtensions": true,
-
-    /* Emit */
-    "noEmit": true,
-
-    /* Interop Constraints */
     "verbatimModuleSyntax": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@/types": [
+        "./types/jsx"
+      ],
+      "@/jsx-runtime": [
+        "./src/index"
+      ],
+      "@/jsx-dev-runtime": [
+        "./src/index"
+      ]
+    },
 
-    /* Type Checking */
+    // Best practices
     "strict": true,
+    "skipLibCheck": true,
     "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
 
-    /* Completeness */
-    "skipLibCheck": true
+    // Some stricter flags (disabled by default)
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noPropertyAccessFromIndexSignature": false
   },
-  "include": ["scripts/**/*.ts", "scripts/**/*.tsx", "src/*.ts", "types/*.d.ts"]
+  "include": [
+    "scripts/**/*.ts",
+    "scripts/**/*.tsx",
+    "src/*.ts",
+    "types/*.d.ts"
+  ]
 }
