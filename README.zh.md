@@ -5,7 +5,10 @@ Inact 是一个可以将 JSX 直接输出为 HTML 字符串的转换库。
 使用其他语言阅读：[English](https://github.com/xueelf/inact/blob/master/README.md) | 中文
 
 ```tsx
-const Paragraph = <p>hello world</p>;
+function Paragraph(): string {
+  return <p>hello world</p>;
+}
+
 console.log(<Paragraph />); // -> '<p>hello world</p>'
 ```
 
@@ -121,6 +124,16 @@ app.innerHTML = <Paragraph content={text} />;
 ```tsx
 <div style={{ backgroundColor: 'red' }} />
 ```
+
+### children
+
+字符串和数字会作为文本输出，`null`、`undefined`、`true`、`false` 和 `[]` 不输出内容。数组会递归输出，所以 `{[0, 1, 2]}` 会输出 `012`。像 `{{}}` 这样的普通对象不是合法的 children。
+
+### boolean attribute
+
+布尔属性通过是否存在来表示状态，`<button disabled />`、`<button disabled={true} />` 会输出 `<button disabled></button>`，`disabled={false}` 会省略该属性。
+
+这与 [MDN](https://developer.mozilla.org/en-US/docs/Glossary/Boolean/HTML) 和 [WHATWG HTML](https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributes) 对 boolean attribute 的说明一致：存在表示 true，不存在表示 false。
 
 ### Fragment
 

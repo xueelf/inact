@@ -5,7 +5,10 @@ Inact is a transformation library that can directly output JSX as HTML strings.
 Read this in other languages: English | [中文](https://github.com/xueelf/inact/blob/master/README.zh.md)
 
 ```tsx
-const Paragraph = <p>hello world</p>;
+function Paragraph(): string {
+  return <p>hello world</p>;
+}
+
 console.log(<Paragraph />); // -> '<p>hello world</p>'
 ```
 
@@ -105,7 +108,7 @@ app.innerHTML = <Paragraph content={text} />;
 
 ## Features
 
-#### `class`
+### `class`
 
 Supports arrays and objects:
 
@@ -114,13 +117,23 @@ Supports arrays and objects:
 <div class={{ foo: true, bar: false }} />
 ```
 
-#### `style`
+### `style`
 
 Supports camel‑case objects:
 
 ```tsx
 <div style={{ backgroundColor: 'red' }} />
 ```
+
+### Children
+
+Strings and numbers render as text, `null`, `undefined`, `true`, `false`, and `[]` render nothing. Arrays render recursively, so `{[0, 1, 2]}` becomes `012`. Plain objects like `{{}}` are invalid children.
+
+### Boolean attributes
+
+Boolean attributes render by presence, `<button disabled />`, `<button disabled={true} />` outputs `<button disabled></button>`, and `disabled={false}` omits the attribute.
+
+This follows the HTML boolean attribute rules documented by [MDN](https://developer.mozilla.org/en-US/docs/Glossary/Boolean/HTML) and [WHATWG HTML](https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributes): presence means true, absence means false.
 
 ### Fragment
 
