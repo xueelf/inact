@@ -17,6 +17,12 @@ export type TagProps<T extends HTMLElement> = Partial<
 
 declare global {
   namespace JSX {
+    type Element = string;
+
+    interface ElementChildrenAttribute {
+      children: unknown;
+    }
+
     type IntrinsicElements = {
       [K in keyof HTMLElementTagNameMap]: TagProps<HTMLElementTagNameMap[K]>;
     };
